@@ -1,6 +1,6 @@
 # Rock, Paper & Scissors
 
-A game written in Rust WebAssembly with some HTML as the display.
+A game written in Rust WebAssembly with some HTML, CSS & JS as the display.
 
 ![](./preview.png)
 
