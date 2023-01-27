@@ -1,0 +1,18 @@
+[package]
+name = "rock_paper_scissors_wasm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+getrandom = { version = "0.2.8", features = ["js"] }
+int-enum = "0.5.0"
+js-sys = "0.3.60"
+lazy_static = "1.4.0"
+rand = "0.8.5"
+wasm-bindgen = "0.2.83"
+web-sys = { version = "0.3.60", features = ["Document", "Element", "HtmlParagraphElement", "HtmlElement", "Node", "Window", "HtmlDivElement"] }

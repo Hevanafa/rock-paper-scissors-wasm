@@ -1,0 +1,119 @@
+<html>
+
+<head>
+	<style>
+		/* https://id.pinterest.com/pin/791929915737309072/ */
+		:root {
+			--pallet-0: #000000;
+			--pallet-1: #151515;
+			--pallet-2: #f8a145;
+			--pallet-3: #f07900;
+			--pallet-4: #d35100;
+		}
+
+		body {
+			text-align: center;
+			background: var(--pallet-0);
+			color: white;
+		}
+
+		.main-container {
+			width: 640px;
+			height: 640px;
+			position: fixed;
+			inset: 0;
+			margin: auto;
+		}
+
+		.signs {
+			display: flex;
+			justify-content: center;
+			gap: 5px;
+		}
+
+		button {
+			font-size: 250%;
+			cursor: pointer;
+
+			background: none;
+			border: 1px solid var(--pallet-3);
+			border-radius: 4px;
+
+			transition: 0.25s;
+		}
+
+		button:hover {
+			background: var(--pallet-4);
+		}
+
+		.ferris-flex {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#player_sign,
+		#ferris_sign {
+			font-size: 250%;
+		}
+
+		.ferris {
+			width: 120px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main-container">
+		<h1>Rock, Paper, Scissors</h1>
+
+		<p>Let's play rock, paper & scissors with Ferris the crab!</p>
+
+		<p>Choose your hand sign:</p>
+
+		<div class="signs">
+			<button onclick="play(0)">✊</button>
+			<button onclick="play(1)">🖐</button>
+			<button onclick="play(2)">✌</button>
+		</div>
+
+		<div class="ferris-flex">
+			<div id="player_sign"></div>
+			<div> >< </div>
+			<div id="ferris_sign"></div>
+			<img class="ferris" src="img/rustacean-flat-happy.png" alt="Ferris the crab" />
+		</div>
+
+		<!-- Something like:
+			Ferris chose {sign} ({the name})
+			You { win / lose }!
+		-->
+		<p id="duel_result">(The result will appear here)</p>
+
+		<p id="win_lose_counter">Wins: 0 | Losses: 0</p>
+	</div>
+
+	<script type="module">
+		import main, { check_sign, randomise_sign, inc_win, inc_loss, update_player_sign, update_ferris_sign, update_duel_result, update_wl_counter } from "./pkg/rock_paper_scissors_wasm.js";
+
+		window.play = function (sign) {
+			randomise_sign();
+
+			update_player_sign(sign);
+			update_ferris_sign();
+			const win = check_sign(sign);
+
+			if (win > 0)
+				inc_win();
+			else if (win < 0)
+				inc_loss();
+
+			update_duel_result(win);
+			update_wl_counter();
+		}
+
+		main();
+	</script>
+</body>
+
+</html>
